@@ -178,6 +178,7 @@ function StudyList(props) {
         {!isLoading &&
           studies.map((study, index) => (
             <TableRow
+              study={study}
               key={`${study.StudyInstanceUID}-${index}`}
               onClick={StudyInstanceUID => handleSelectItem(StudyInstanceUID)}
               AccessionNumber={study.AccessionNumber || ''}
@@ -239,7 +240,14 @@ function TableRow(props) {
     StudyInstanceUID,
     onClick: handleClick,
     displaySize,
+    study
   } = props;
+
+  const sendStudyToModality = function(e, study, StudyInstanceUID) {
+    e.stopPropagation();
+    console.log(StudyInstanceUID)
+    console.log(study)
+  }
 
   const { t } = useTranslation('StudyList');
 
@@ -317,7 +325,15 @@ function TableRow(props) {
         </div>
       </td>
       {/* DATE */}
-      <td style={{ textAlign: 'center' }}>{StudyDate}</td>
+      <td style={{ textAlign: 'center' }}>
+        {StudyDate}
+        <button
+          className="btn"
+          onClick={(e) => sendStudyToModality(e, study, StudyInstanceUID)}
+        >
+          hello
+        </button>
+      </td>
     </tr>
   );
 
