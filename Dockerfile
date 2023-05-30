@@ -57,6 +57,8 @@ ENV QUICK_BUILD true
 # ENV GENERATE_SOURCEMAP=false
 # ENV REACT_APP_CONFIG=config/default.js
 
+ENV PUBLIC_URL /ohif/
+
 RUN yarn run build
 
 # Stage 3: Bundle the built application into a Docker container
