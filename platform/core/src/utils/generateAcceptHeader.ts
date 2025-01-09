@@ -17,7 +17,6 @@ const generateAcceptHeader = (
     acceptHeader.push('type=application/octet-stream');
   }
 
-  acceptHeader.push('transfer-syntax=*');
   if (!omitQuotationForMultipartRequest) {
     //need to add quotation for each mime type of each accept entry
     acceptHeader = acceptHeader.map(mime => {
