@@ -223,6 +223,15 @@ module.exports = (env, argv, { SRC_DIR, ENTRY }) => {
         buffer: require.resolve('buffer'),
       },
     },
+    node: {
+      // Leave __filename / __dirname references alone. Webpack's default for
+      // web builds ('mock') makes it treat `typeof __filename` as always
+      // defined, which folds away the guards that Emscripten-compiled deps
+      // (onnxruntime-web, cornerstone codecs) use to detect Node. The bare
+      // reference is then left behind and throws in the browser.
+      __filename: false,
+      __dirname: false,
+    },
     plugins: [
       new webpack.DefinePlugin(defineValues),
       new webpack.ProvidePlugin({
